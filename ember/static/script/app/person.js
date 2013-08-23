@@ -37,8 +37,6 @@ PersonApp.PaginationMixins = Ember.Mixin.create({
 });
 
 PersonApp.PersonPageController = Ember.ArrayController.extend(PersonApp.PaginationMixins, {
-    username: "username",
-
     addPerson: function() {
         PersonApp.Person.createRecord({ username: this.get('username') });
         this.commit();
