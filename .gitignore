@@ -1,0 +1,6 @@
+*.pyc
+*.pyo
+
+ember.db
+
+node_modules/*

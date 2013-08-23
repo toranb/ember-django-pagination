@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Users</title>
+<link href="{{ STATIC_URL }}css/default.css" rel="stylesheet" type="text/css">
+<!--[if IE]>
+  <script src="{{ STATIC_URL}}script/vendor/ie.js" type="text/javascript"></script>
+<![endif]-->
+</head>
+<body>
+
+<script type="text/x-handlebars" data-template-name="application">
+{% verbatim %}
+  <div id="main">
+    {{ outlet }}
+  </div>
+{% endverbatim %}
+</script>
+
+<script type="text/x-handlebars" data-template-name="person">
+{% verbatim %}
+
+<div>
+   {{view Ember.TextField value=username}}
+   <input type="submit" value="add" {{action addPerson this target="view"}}/>
+</div><br />
+
+<table width="250px">
+<thead>
+
+<th>id</th>
+<th>username</th>
+
+<th>update</th>
+<th>delete</th>
+</thead>
+<tbody>
+   {{#each person in controller}}
+    <tr>
+      <td>{{person.id}}</td>
+      <td>{{view Ember.TextField valueBinding="person.username"}}</td>
+      <td><input type="submit" value="update" {{action updatePerson person target="controller"}}/></td>
+      <td><input type="submit" value="delete" {{action deletePerson person target="controller"}}/></td>
+    </tr>
+   {{/each}}
+</tbody>
+</table>
+
+{{#if pagination.next}}
+  {{#linkTo 'person.page' pagination.next}}next{{/linkTo}}
+{{/if}}
+
+{% endverbatim %}
+</script>
+
+<script src="{{ STATIC_URL }}script/vendor/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}script/vendor/handlebars-1.0.0.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}script/vendor/ember-1.0.0-rc.7.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}script/vendor/ember-data.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}script/vendor/adapter.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}script/app/person.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+An example app showing pagination and ember-data
+
+To run this django application
+
+1. pip install -r requirements.txt
+2. python manage.py syncdb --noinput
+3. python manage.py runserver
+
+(not yet working -WIP after a recent pull request)
