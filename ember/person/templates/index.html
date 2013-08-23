@@ -17,12 +17,12 @@
 {% endverbatim %}
 </script>
 
-<script type="text/x-handlebars" data-template-name="person">
+<script type="text/x-handlebars" data-template-name="person/page">
 {% verbatim %}
 
 <div>
-   {{view Ember.TextField value=username}}
-   <input type="submit" value="add" {{action addPerson this target="view"}}/>
+   {{view Ember.TextField valueBinding="username"}}
+   <input type="submit" value="add" {{action addPerson}}/>
 </div><br />
 
 <table width="250px">
