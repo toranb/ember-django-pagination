@@ -23,7 +23,7 @@ PersonApp.PersonIndexRoute = Ember.Route.extend({
 
 PersonApp.PersonPageRoute = Ember.Route.extend({
     model: function(params) {
-        return PersonApp.Person.find();
+        return PersonApp.Person.find({page: params.page});
     },
 });
 
@@ -36,9 +36,11 @@ PersonApp.PaginationMixins = Ember.Mixin.create({
     }.property('model.isLoaded'),
 });
 
-PersonApp.PersonController = Ember.ArrayController.extend(PersonApp.PaginationMixins, {
-    addPerson: function(username) {
-        PersonApp.Person.createRecord({ username: username });
+PersonApp.PersonPageController = Ember.ArrayController.extend(PersonApp.PaginationMixins, {
+    username: "username",
+
+    addPerson: function() {
+        PersonApp.Person.createRecord({ username: this.get('username') });
         this.commit();
     },
     updatePerson: function(event) {
@@ -50,17 +52,10 @@ PersonApp.PersonController = Ember.ArrayController.extend(PersonApp.PaginationMi
     },
     commit: function() {
         this.get('store').commit();
-    }
-});
-
-//not part of the pagination example in any way
-PersonApp.PersonView = Ember.View.extend({
-    templateName: 'person',
-    addPerson: function(event) {
-        var username = this.get('username');
-        if (username) {
-            this.get('controller').addPerson(username);
-            this.set('username', '');
-        }
+        // we need to reload data from the server, as the action (add or delete) may have
+        // changed object list in the current page
+        var modelType = this.get('model.type');
+        var current_page = this.get('store').typeMapFor(modelType).metadata.pagination.current;
+        this.transitionToRoute('person.page', current_page);
     }
 });
