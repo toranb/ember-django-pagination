@@ -4,3 +4,11 @@ To run this django application
 
 1. pip install -r requirements.txt
 2. python manage.py runserver
+
+If you just want to see the ember part of this project
+
+https://github.com/toranb/ember-django-pagination/blob/master/ember/static/script/app/person.js
+
+If you want to see the handelbars template for the above
+
+https://github.com/toranb/ember-django-pagination/blob/master/ember/person/templates/index.html
