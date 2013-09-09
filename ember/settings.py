@@ -106,6 +106,6 @@ LOGGING = {
 }
 
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 4,
+    'PAGINATE_BY': 6,
     'PAGINATE_BY_PARAM': 'page_size' 
 }
